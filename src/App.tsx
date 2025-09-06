@@ -13,6 +13,8 @@ import ITRAutofill from "./pages/ITRAutofill";
 import TaxInsights from "./pages/TaxInsights";
 import AIAssistant from "./pages/AIAssistant";
 import TaxPlanning from "./pages/TaxPlanning";
+import AddInvestment from "./pages/AddInvestment";
+import ViewReport from "./pages/ViewReport";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +37,8 @@ const App = () => (
                 <Route path="/tax-insights" element={<TaxInsights />} />
                 <Route path="/tax-planning" element={<TaxPlanning />} />
                 <Route path="/ai-assistant" element={<AIAssistant />} />
+                <Route path="/add-investment" element={<AddInvestment />} />
+                <Route path="/view-report" element={<ViewReport />} />
               </Routes>
             </SidebarProvider>
           } />

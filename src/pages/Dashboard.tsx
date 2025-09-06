@@ -334,11 +334,19 @@ const Dashboard = () => {
                   <Calculator className="h-6 w-6 mb-2" />
                   Generate ITR
                 </Button>
-                <Button variant="outline" className="h-20 flex-col">
+                <Button 
+                  variant="outline" 
+                  className="h-20 flex-col"
+                  onClick={() => navigate('/dashboard/add-investment')}
+                >
                   <TrendingUp className="h-6 w-6 mb-2" />
                   Add Investment
                 </Button>
-                <Button variant="outline" className="h-20 flex-col">
+                <Button 
+                  variant="outline" 
+                  className="h-20 flex-col"
+                  onClick={() => navigate('/dashboard/view-report')}
+                >
                   <PieChart className="h-6 w-6 mb-2" />
                   View Reports
                 </Button>
