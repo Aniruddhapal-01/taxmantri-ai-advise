@@ -10,9 +10,11 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RechartsPieChart, Cell } from "recharts";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [isNewRegime, setIsNewRegime] = useState(false);
+  const navigate = useNavigate();
 
   const monthlyData = [
     { month: 'Apr', income: 85000, tax: 12750 },
@@ -340,7 +342,11 @@ const Dashboard = () => {
                   <PieChart className="h-6 w-6 mb-2" />
                   View Reports
                 </Button>
-                <Button variant="outline" className="h-20 flex-col">
+                <Button 
+                  variant="outline" 
+                  className="h-20 flex-col"
+                  onClick={() => navigate('/dashboard/tax-planning')}
+                >
                   <ArrowUpRight className="h-6 w-6 mb-2" />
                   Tax Planning
                 </Button>
