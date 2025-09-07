@@ -77,10 +77,11 @@ const Index = () => {
           <h1 className="text-hero mb-6 animate-fade-in">
             Stop Wrestling with
             <br />
-            <span className="relative">
-              Tax Filing
-              <div className="absolute -bottom-2 left-0 right-0 h-1 bg-hero-gradient rounded-full animate-slide-up"></div>
-            </span>
+            <span className="relative bg-gradient-to-r from-fintech-emerald to-fintech-slate bg-clip-text text-transparent inline-block -mt-2">
+  Tax Filing
+  <div className="absolute -bottom-2 left-0 right-0 h-1 bg-hero-gradient rounded-full animate-slide-up"></div>
+</span>
+
           </h1>
           
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">
@@ -232,7 +233,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/auth">
-                <Button size="lg" variant="outline" className="text-lg px-10 border-white text-white hover:bg-white hover:text-fintech-emerald">
+                <Button size="lg" variant="outline" className="text-lg px-10 border-white text-black hover:bg-white hover:text-fintech-emerald">
                   <Shield className="mr-2 h-5 w-5" />
                   Secure Login
                 </Button>
