@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,57 +14,77 @@ const ITRAutofill = () => {
   const [generationComplete, setGenerationComplete] = useState(false);
   const { toast } = useToast();
 
-  const handleGenerateITR = () => {
+  const handleGenerateITR = async () => {
     setIsGenerating(true);
-    
-    // Simulate ITR generation process
-    setTimeout(() => {
-      setIsGenerating(false);
-      setGenerationComplete(true);
-      toast({
-        title: "ITR Generated Successfully! 🎉",
-        description: "Your ITR JSON file is ready for download",
+
+    try {
+      // API call to backend
+      const res = await fetch("http://localhost:3031/api/itr/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: "demoUser" }),
       });
-    }, 5000);
+
+      const data = await res.json();
+      console.log("Backend Response:", data);
+
+      // Simulate delay for UX
+      setTimeout(() => {
+        setIsGenerating(false);
+        setGenerationComplete(true);
+        toast({
+          title: "ITR Generated Successfully! 🎉",
+          description: data.message,
+        });
+      }, 5000);
+    } catch (error) {
+      console.error("Error generating ITR:", error);
+      setIsGenerating(false);
+      toast({
+        title: "Error",
+        description: "Failed to generate ITR",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleDownload = () => {
-    // Mock ITR JSON data
     const mockITRData = {
       assessmentYear: "2024-25",
       financialYear: "2023-24",
       personalInfo: {
         name: "Sample Taxpayer",
         pan: "ABCDE1234F",
-        aadhaar: "1234-5678-9012"
+        aadhaar: "1234-5678-9012",
       },
       income: {
         salary: 1200000,
         houseProperty: 0,
         capitalGains: 205000,
-        otherSources: 45000
+        otherSources: 45000,
       },
       deductions: {
         section80C: 150000,
         section80D: 25000,
-        standardDeduction: 50000
+        standardDeduction: 50000,
       },
       taxLiability: 92500,
       forms: {
         form26AS: "Fetched and validated",
         AIS: "Auto-populated",
-        TIS: "Reconciled"
-      }
+        TIS: "Reconciled",
+      },
     };
 
     const dataStr = JSON.stringify(mockITRData, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
-    const exportFileDefaultName = 'ITR_2024-25_Generated.json';
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
+    const dataUri =
+      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = "ITR_2024-25_Generated.json";
+
+    const linkElement = document.createElement("a");
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
     linkElement.click();
 
     toast({
@@ -100,7 +119,9 @@ const ITRAutofill = () => {
           <SidebarTrigger className="mr-4" />
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-fintech-slate">ITR Autofill</h1>
-            <p className="text-sm text-muted-foreground">Generate your Income Tax Return with AI-powered automation</p>
+            <p className="text-sm text-muted-foreground">
+              Generate your Income Tax Return with AI-powered automation
+            </p>
           </div>
           <Badge className="bg-fintech-success/10 text-fintech-success border-fintech-success/20">
             🤖 AI Powered
@@ -152,7 +173,9 @@ const ITRAutofill = () => {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-fintech-success" />
-                    <span className="font-medium text-fintech-success">ITR Generated Successfully!</span>
+                    <span className="font-medium text-fintech-success">
+                      ITR Generated Successfully!
+                    </span>
                   </div>
                   <div className="bg-fintech-success/10 p-4 rounded-lg">
                     <p className="text-sm text-fintech-success font-medium">
@@ -164,7 +187,9 @@ const ITRAutofill = () => {
               {!isGenerating && !generationComplete && (
                 <div className="text-center py-8">
                   <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground">Click "Generate ITR JSON" to auto-create your tax return</p>
+                  <p className="text-muted-foreground">
+                    Click "Generate ITR JSON" to auto-create your tax return
+                  </p>
                 </div>
               )}
             </CardContent>
