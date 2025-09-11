@@ -85,7 +85,7 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
-    "vite": "^5.4.19"
+    "vite": "^5.4.20"
   },
   "description": "**URL**: https://lovable.dev/projects/9f1e46a6-c82b-4c1a-9779-ed49feab0e63",
   "main": "eslint.config.js",
